@@ -53,7 +53,7 @@ Article.fetchAll = () => {
     let articleData = JSON.parse(localStorage.getItem('rawData'));
     Article.loadAll(articleData);
     console.log(articleData);
-
+  // COMMENT-DONE: If there is local storage then just get the JSON obj from local storage. If not, then get the JSON data using ajax and wait for the data to fully load before moving onto constructing anything.
   } else {
     $.getJSON('../data/hackerIpsum.json')
       .then(function(data) {

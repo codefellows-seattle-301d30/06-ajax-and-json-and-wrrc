@@ -84,8 +84,8 @@
     <script src="scripts/article.js"></script>
     <script src="scripts/articleView.js"></script>
     <script>
+      //COMMENT-DONE: We want to load (or ensure the existence of ) our local storage JSON object before anything else runs because that's the data we use to construct our artcile objects.
       Article.fetchAll();
-      // articleView.initIndexPage();
     </script>
   </body>
 </html>
