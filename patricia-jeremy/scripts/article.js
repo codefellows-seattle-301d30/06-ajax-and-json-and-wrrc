@@ -38,6 +38,8 @@ Article.loadAll = rawData => {
   rawData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
 
   rawData.forEach(articleObject => Article.all.push(new Article(articleObject)))
+
+  articleView.initIndexPage();
 }
 
 // REVIEW: This function will retrieve the data from either a local or remote source, and process it, then hand off control to the View.
@@ -49,6 +51,12 @@ Article.fetchAll = () => {
     Article.loadAll();
 
   } else {
+    //reference JSON
+
+    //set rawData in to local storage
+
+    //load all
+    Article.loadAll();
 
   }
 }
