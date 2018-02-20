@@ -8,7 +8,6 @@ function Article (rawDataObj) {
   this.body = rawDataObj.body;
   this.publishedOn = rawDataObj.publishedOn;
 }
-let rawData = [];
 // REVIEW: Instead of a global `articles = []` array, let's attach this list of all articles directly to the constructor function. Note: it is NOT on the prototype. In JavaScript, functions are themselves objects, which means we can add properties/values to them at any time. In this case, the array relates to ALL of the Article objects, so it does not belong on the prototype, as that would only be relevant to a single instantiated Article.
 Article.all = [];
 
@@ -46,16 +45,17 @@ Article.fetchAll = () => {
 
   if (localStorage.rawData) {
 
-    Article.loadAll();
+    Article.loadAll(JSON.parse(localStorage.rawData));
     articleView.initIndexPage();
 
   } else {
-    console.log('fetch');
-    $.getJSON('/data/hackerIpsum.json', function(newData){localStorage.rawData = JSON.stringify(newData)});
-    // rawData = newData; 
-    Article.loadAll();
-    articleView.initIndexPage();
+    $.getJSON('/data/hackerIpsum.json')
+      .then(rawData => {
+        localStorage.rawData = JSON.stringify(rawData);
+        Article.loadAll(rawData);
+        articleView.initIndexPage();
+      })
   }
-}
+};
 
-//We wanted to first check to see if it was in storage and get it from there, which is fast. If not we used the getJSON to get it from the server which was slower.
+//We wanted to first check to see if it was in storage and get it from there, which is fast. If not we used the $.getJSON to get it from the server which was slower.
