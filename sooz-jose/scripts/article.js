@@ -13,7 +13,8 @@ function Article (rawDataObj) {
 Article.all = [];
 
 // COMMENT: Why isn't this method written as an arrow function?
-// Because contextual this is needed and we don't want the "this" to bubble up in the DOM we cannot use an arrow function in this case.
+// Because contextual this is needed and we don't want the "this" to bubble up in the DOM we cannot use an arrow function in this case. Also, the 'toHtml' method exists only in the constructor function which uses contextual this. 
+
 Article.prototype.toHtml = function() {
   let template = Handlebars.compile($('#article-template').text());
 
@@ -21,7 +22,7 @@ Article.prototype.toHtml = function() {
 
   // COMMENT: What is going on in the line below? What do the question mark and colon represent? How have we seen this same logic represented previously?
   // Not sure? Check the docs!
-  // This variable is an if statement using a ternary to check if the content is published and if published generate the # of days ago it published and put the date value on the the article object, otherwise the article object gets the published property of draft.
+  // This variable is an if statement using a ternary to check if the content is published and if published generate the # of days ago it published and put the date value on the the article object, otherwise the article object gets the published property get the value of draft.
   this.publishStatus = this.publishedOn ? `published ${this.daysAgo} days ago` : '(draft)';
   this.body = marked(this.body);
 
@@ -33,7 +34,7 @@ Article.prototype.toHtml = function() {
 // REVIEW: This function will take the rawData, how ever it is provided, and use it to instantiate all the articles. This code is moved from elsewhere, and encapsulated in a simply-named function for clarity.
 
 // COMMENT: Where is this function called? What does 'rawData' represent now? How is this different from previous labs?
-// This funciton is called in the .fetchAll method below. The rawData represents all the article objects in the JSON file. The only difference between this lab and past labs on the rawData is that now the data file doesn't have an array name, it is a simple array, because it is in JSON and can be read by any JSON/AJAX method. In the function below we are only retrieving the key value of publishedOn from two objects to find the relative order of publication of articles.
+// This funciton is called by the .fetchAll method below. The rawData represents all the article objects in the JSON file. The differences between this lab and past labs on the rawData is that now the data file is in JSON format and exists with a simple array, because it is in JSON format and can be read by any JSON/AJAX method. In the function below we are only retrieving the key value of publishedOn from two objects to find the relative order of publication of articles.
 Article.loadAll = rawData => {
   rawData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
 
