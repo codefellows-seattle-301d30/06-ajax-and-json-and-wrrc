@@ -13,7 +13,7 @@ function Article (rawDataObj) {
 Article.all = [];
 
 // COMMENT: Why isn't this method written as an arrow function?
-// PUT YOUR RESPONSE HERE
+// Because this function requires access to contextual 'this'.
 Article.prototype.toHtml = function() {
   let template = Handlebars.compile($('#article-template').text());
 
@@ -21,7 +21,13 @@ Article.prototype.toHtml = function() {
 
   // COMMENT: What is going on in the line below? What do the question mark and colon represent? How have we seen this same logic represented previously?
   // Not sure? Check the docs!
-  // PUT YOUR RESPONSE HERE
+  // This uses ternary operator notation. In the past we would express this with an 'if' statement. The question mark is like 'if' and the colon is like 'else'. So this means
+  //if this.pulishedOn === true {
+  //  this.publishStatus = `published ${this.daysAgo} days ago`}
+  //else {
+  //  this.publishStatus = '(draft)';
+  //}
+  //}
   this.publishStatus = this.publishedOn ? `published ${this.daysAgo} days ago` : '(draft)';
   this.body = marked(this.body);
 
@@ -33,21 +39,24 @@ Article.prototype.toHtml = function() {
 // REVIEW: This function will take the rawData, how ever it is provided, and use it to instantiate all the articles. This code is moved from elsewhere, and encapsulated in a simply-named function for clarity.
 
 // COMMENT: Where is this function called? What does 'rawData' represent now? How is this different from previous labs?
-// PUT YOUR RESPONSE HERE
+// This function is called in Article.fetchAll(). rawData represents whatever fetchAll() has sent to this function. That data could come from localStorage, or it could come from a file. This function doesn't care where the data came from.
+
 Article.loadAll = rawData => {
-  rawData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
-  rawData.forEach(articleObject => Article.all.push(new Article(articleObject)))
+  rawData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)));
+  rawData.forEach(articleObject => Article.all.push(new Article(articleObject)));
 }
 
 // REVIEW: This function will retrieve the data from either a local or remote source, and process it, then hand off control to the View.
 Article.fetchAll = () => {
   // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
-  console.log('fetch all is running');
-  if (localStorage.rawData) {
-    console.log('localstorage.rawdata is true');
-    Article.loadAll();
 
+  if (localStorage.rawData) {
+    Article.loadAll(JSON.parse(localStorage.rawData));
   } else {
-    $.get('data/hackerIpsum.json', (data) => Article.loadAll(data));
+    $.get('data/hackerIpsum.json', (data) => {
+      localStorage.rawData = JSON.stringify(data);
+      Article.loadAll(data);
+      articleView.initIndexPage();
+    });
   }
 }
