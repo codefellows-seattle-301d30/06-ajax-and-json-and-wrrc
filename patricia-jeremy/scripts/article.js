@@ -11,6 +11,7 @@ function Article (rawDataObj) {
 
 // REVIEW: Instead of a global `articles = []` array, let's attach this list of all articles directly to the constructor function. Note: it is NOT on the prototype. In JavaScript, functions are themselves objects, which means we can add properties/values to them at any time. In this case, the array relates to ALL of the Article objects, so it does not belong on the prototype, as that would only be relevant to a single instantiated Article.
 Article.all = [];
+let rawData;
 
 // COMMENT: Why isn't this method written as an arrow function?
 // Because it uses contextual this and needs to have its own scope.
@@ -34,6 +35,7 @@ Article.prototype.toHtml = function() {
 
 // COMMENT: Where is this function called? What does 'rawData' represent now? How is this different from previous labs?
 // rawData in previous labs contained the data for the blog articles. Now rawData is a callback funtion that is used to load all the articles by being called in the fetchAll function.
+
 Article.loadAll = rawData => {
   rawData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
 
@@ -42,21 +44,36 @@ Article.loadAll = rawData => {
   articleView.initIndexPage();
 }
 
+console.log('is this working1');
+
 // REVIEW: This function will retrieve the data from either a local or remote source, and process it, then hand off control to the View.
 Article.fetchAll = () => {
   // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
   //The if statement is checking if localStorage.rawData exists.The rawData is set to localStorage in the else conditional we are about to write!
   if (localStorage.rawData) {
 
-    Article.loadAll();
+    Article.loadAll(JSON.parse(localStorage.rawData));
 
   } else {
+    
     //reference JSON
+    // $.get('/data/hackerIpsum.json', data => console.log(data));
+    $.getJSON('data/hackerIpsum.json')
+      .then(data => {
+        
+        localStorage.setItem('rawData', JSON.stringify(data));
+        // localStorage.rawData = JSON.stringify('data/hackerIpsum.json')
+        Article.loadAll(data);
+      }
+      )
+
+    console.log(rawData);
 
     //set rawData in to local storage
 
     //load all
-    Article.loadAll();
+   
 
   }
 }
+
