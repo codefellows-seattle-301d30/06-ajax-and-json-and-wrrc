@@ -8,12 +8,11 @@ function Article (rawDataObj) {
   this.body = rawDataObj.body;
   this.publishedOn = rawDataObj.publishedOn;
 }
-
 // REVIEW: Instead of a global `articles = []` array, let's attach this list of all articles directly to the constructor function. Note: it is NOT on the prototype. In JavaScript, functions are themselves objects, which means we can add properties/values to them at any time. In this case, the array relates to ALL of the Article objects, so it does not belong on the prototype, as that would only be relevant to a single instantiated Article.
 Article.all = [];
 
 // COMMENT: Why isn't this method written as an arrow function?
-// It uses contextual this and we don't want it to bubble up outside of the function. 
+// It uses contextual this and we don't want it to bubble up outside of the function.
 Article.prototype.toHtml = function() {
   let template = Handlebars.compile($('#article-template').text());
 
@@ -33,7 +32,7 @@ Article.prototype.toHtml = function() {
 // REVIEW: This function will take the rawData, how ever it is provided, and use it to instantiate all the articles. This code is moved from elsewhere, and encapsulated in a simply-named function for clarity.
 
 // COMMENT: Where is this function called? What does 'rawData' represent now? How is this different from previous labs?
-// This function is called in fetch all after calling for local storage. If you don't have local storage it is going to load it up. rawData repersents data stored in the server.
+// This function is called in fetchAll after calling for local storage. If you don't have local storage it is going to load it up. rawData repersents data stored in the server.
 Article.loadAll = rawData => {
   rawData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
 
@@ -43,12 +42,20 @@ Article.loadAll = rawData => {
 // REVIEW: This function will retrieve the data from either a local or remote source, and process it, then hand off control to the View.
 Article.fetchAll = () => {
   // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
+
   if (localStorage.rawData) {
 
-    Article.loadAll();
+    Article.loadAll(JSON.parse(localStorage.rawData));
+    articleView.initIndexPage();
 
   } else {
-    $.getJSON('../data/hackerIpsum.json', Article.loadAll());
+    $.getJSON('/data/hackerIpsum.json')
+      .then(rawData => {
+        localStorage.rawData = JSON.stringify(rawData);
+        Article.loadAll(rawData);
+        articleView.initIndexPage();
+      })
   }
-}
-//We wanted to first check to see if it was in storage and get it from there, which is fast. If not we used the getJSON to get it from the server which was slower. 
+};
+
+//We wanted to first check to see if it was in storage and get it from there, which is fast. If not we used the $.getJSON to get it from the server which was slower.
