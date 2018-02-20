@@ -60,3 +60,17 @@ Article.fetchAll = () => {
       });
   }
 }
+
+// Stretch goal
+Article.test = () => {
+  $.ajax({
+    type: "GET",
+    url: 'data/hackerIpsum.json',
+    ifModified: true,
+    success: function (data, message, xhr) {
+      console.log(xhr.status);
+      localStorage.clear();
+      Article.fetchAll();
+    }
+  });
+}
