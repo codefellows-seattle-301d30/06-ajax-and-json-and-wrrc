@@ -13,7 +13,7 @@ function Article (rawDataObj) {
 Article.all = [];
 
 // COMMENT: Why isn't this method written as an arrow function?
-// PUT YOUR RESPONSE HERE
+// We cant use the arrow function because the function uses contextual 'this'.
 Article.prototype.toHtml = function() {
   let template = Handlebars.compile($('#article-template').text());
 
@@ -21,7 +21,7 @@ Article.prototype.toHtml = function() {
 
   // COMMENT: What is going on in the line below? What do the question mark and colon represent? How have we seen this same logic represented previously?
   // Not sure? Check the docs!
-  // PUT YOUR RESPONSE HERE
+  // Ternary operator which is the same as using an if/else statement. The ? represents what happens if the condition is true. The : represents what happens if the condition is false.
   this.publishStatus = this.publishedOn ? `published ${this.daysAgo} days ago` : '(draft)';
   this.body = marked(this.body);
 
@@ -33,10 +33,10 @@ Article.prototype.toHtml = function() {
 // REVIEW: This function will take the rawData, how ever it is provided, and use it to instantiate all the articles. This code is moved from elsewhere, and encapsulated in a simply-named function for clarity.
 
 // COMMENT: Where is this function called? What does 'rawData' represent now? How is this different from previous labs?
-// PUT YOUR RESPONSE HERE
+// This function is called after we retrieve the data that we want to load. Raw data represents the array of objects that contains all the data.
 Article.loadAll = rawData => {
   rawData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
-
+  
   rawData.forEach(articleObject => Article.all.push(new Article(articleObject)))
 }
 
@@ -44,10 +44,15 @@ Article.loadAll = rawData => {
 Article.fetchAll = () => {
   // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
   if (localStorage.rawData) {
-
-    Article.loadAll();
-
+    Article.loadAll(JSON.parse(localStorage.rawData));
+    articleView.initIndexPage();
   } else {
-
+    $.getJSON('/data/hackerIpsum.json')
+      .then(rawData => {
+        Article.loadAll(rawData);
+        localStorage.setItem('rawData', JSON.stringify(rawData));
+        articleView.initIndexPage();
+      });
   }
 }
+// COMMENT: The sequence of code execution if nothing is in local storage starts with sending a request for the data from the server. We retrieve the data in JSON format and run it through the constructor to create all the article objects. Then we cache those article objects into local storage and render the index page.
