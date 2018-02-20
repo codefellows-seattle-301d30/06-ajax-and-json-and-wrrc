@@ -13,7 +13,7 @@ function Article (rawDataObj) {
 Article.all = [];
 
 // COMMENT: Why isn't this method written as an arrow function?
-// PUT YOUR RESPONSE HERE
+// Because this function requires access to contextual 'this'.
 Article.prototype.toHtml = function() {
   let template = Handlebars.compile($('#article-template').text());
 
@@ -21,7 +21,13 @@ Article.prototype.toHtml = function() {
 
   // COMMENT: What is going on in the line below? What do the question mark and colon represent? How have we seen this same logic represented previously?
   // Not sure? Check the docs!
-  // PUT YOUR RESPONSE HERE
+  // This uses ternary operator notation. In the past we would express this with an 'if' statement. The question mark is like 'if' and the colon is like 'else'. So this means
+  //if this.pulishedOn === true {
+  //  this.publishStatus = `published ${this.daysAgo} days ago`}
+  //else {
+  //  this.publishStatus = '(draft)';
+  //}
+  //}
   this.publishStatus = this.publishedOn ? `published ${this.daysAgo} days ago` : '(draft)';
   this.body = marked(this.body);
 

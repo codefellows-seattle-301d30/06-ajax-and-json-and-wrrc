@@ -107,10 +107,10 @@ articleView.create = () => {
 
 
 articleView.initIndexPage = () => {
+  Article.fetchAll();
   Article.all.forEach(article => {
     $('#articles').append(article.toHtml())
   });
-  Article.fetchAll();
   articleView.populateFilters();
   articleView.handleCategoryFilter();
   articleView.handleAuthorFilter();
