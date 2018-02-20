@@ -55,25 +55,14 @@ Article.fetchAll = () => {
     Article.loadAll(JSON.parse(localStorage.rawData));
 
   } else {
-    
-    //reference JSON
-    // $.get('/data/hackerIpsum.json', data => console.log(data));
     $.getJSON('data/hackerIpsum.json')
-      .then(data => {
-        
+      .then(data => {       
         localStorage.setItem('rawData', JSON.stringify(data));
-        // localStorage.rawData = JSON.stringify('data/hackerIpsum.json')
         Article.loadAll(data);
+        //explain the order of calling
+        //we start by .getJSON from the hackerIpsum file, which contains all our blog data. We then stringified and set it to localStorage. We then called loadAll. We did this order because rawData has to be in localStorage before loadAll or there won't be any blog articles to load!
       }
       )
-
-    console.log(rawData);
-
-    //set rawData in to local storage
-
-    //load all
-   
-
   }
 }
 
