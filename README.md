@@ -1,7 +1,7 @@
 # Kilovolt Blog - Day 6
 
 **Author**: Jose Reyes and Suzanne Richman
-**Version**: 1.0.0 (increment the patch/fix version number up if you make more commits past your first submission)
+**Version**: 1.0.1 (increment the patch/fix version number up if you make more commits past your first submission)
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for a Code Fellows 301 class. (i.e. What's your problem domain?) -->
@@ -13,10 +13,12 @@
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 
 ## Change Log
-<!-- Use this are to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an examples:
-
-01-01-2001 4:59pm - Application now has a fully-functional express server, with GET and POST routes for the book resource.
+02-20-2018 10:42am - Commit built out our version of starter code, proofed files, inserted JS script in HTML to generate articles, store them in localStorage and get them form local storage if already present. Also finished the articleView functions to check/get local storage data. Created README.
 
 ## Credits and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
--->
+* Thanks to my instructors and TAs and our classmates 
+* The following libraries were used: jQuery,Highlight JS, Handlebars and Railcast.
+* We referenced the jQuery cheat sheet: https://oscarotero.com/jquery/
+* We used HandleBars library.
+* We referenced our text book: Jon Duckett - JavaScript and JQuery.
+* Reference for ternary from MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
