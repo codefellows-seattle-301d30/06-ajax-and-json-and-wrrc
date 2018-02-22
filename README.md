@@ -1,7 +1,7 @@
 # Kilovolt Blog - Day 6
 
 **Author**: Jose Reyes and Suzanne Richman
-**Version**: 1.0.1 (increment the patch/fix version number up if you make more commits past your first submission)
+**Version**: 1.0.2 (increment the patch/fix version number up if you make more commits past your first submission)
 
 ## Overview
 This product is designed to give users a consistent reading and navigation experience across mobile and desktop devices, with content ordered by most recent first and sortable by both author or category. Additionally, users who want to add articles to the blog may now do so and either publish immediately or review a draft. If they want they can use the JSON link at the bottom to add their new content to the blogArticles.js to be displayed on the main blog, as well. We wanted the user to load articles from an external source.
@@ -38,9 +38,14 @@ The user would need to
 I used IcoMoon icon font for navigation icons. I included the jQuery, Handlebars, Hightlight JS, and Railcasts libraies, with related CSS as needed. Applied AJAX function RESTful website application. I used Chrome to analyze and inspect. Project is built used HTML, CSS and JavaScript.```
 
 ## Change Log
-02-20-2018 10:42am - Commit built out our version of starter code, proofed files, inserted JS script in HTML to generate articles, store them in localStorage and get them form local storage if already present. Also finished the articleView functions to check/get local storage data. Created README.
+02-20-2018 
+10:42am - Commit built out our version of starter code, proofed files, inserted JS script in HTML to generate articles, store them in localStorage and get them form local storage if already present. Also finished the articleView functions to check/get local storage data. Created README.
 
 12:50 - last commit, all code reviewed and Zombie code removed. Updated README.
+
+02-21-2018
+
+
 
 ## Credits and Collaborations
 * Thanks to my instructors and TAs and our classmates 
