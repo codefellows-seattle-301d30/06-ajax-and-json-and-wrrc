@@ -1,11 +1,10 @@
 # Kilovolt Blog - Day 6
 
 **Author**: Jose Reyes and Suzanne Richman
-**Version**: 1.0.1 (increment the patch/fix version number up if you make more commits past your first submission)
+**Version**: 1.0.2 
 
 ## Overview
 This product is designed to give users a consistent reading and navigation experience across mobile and desktop devices, with content ordered by most recent first and sortable by both author or category. Additionally, users who want to add articles to the blog may now do so and either publish immediately or review a draft. If they want they can use the JSON link at the bottom to add their new content to the blogArticles.js to be displayed on the main blog, as well. We wanted the user to load articles from an external source.
-
 
 ## Getting Started
 
@@ -42,6 +41,8 @@ I used IcoMoon icon font for navigation icons. I included the jQuery, Handlebars
 
 12:50 - last commit, all code reviewed and Zombie code removed. Updated README.
 
+02-22-2018 1:30pm - Resubmitting with a fix for the error of the page not reloading when localStorage is cleared. 
+
 ## Credits and Collaborations
 * Thanks to my instructors and TAs and our classmates 
 * The following libraries were used: jQuery,Highlight JS, Handlebars and Railcast.
@@ -52,3 +53,4 @@ I used IcoMoon icon font for navigation icons. I included the jQuery, Handlebars
 
 * Reference for local storage -https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage
 * Reference for arrow functions MDN- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+* Special thanks to Josiah Green for reviewing my fetchAll function with me.
