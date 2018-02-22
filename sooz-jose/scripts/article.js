@@ -13,7 +13,7 @@ function Article (rawDataObj) {
 Article.all = [];
 
 // COMMENT: Why isn't this method written as an arrow function?
-// Because contextual this is needed and we don't want the "this" to bubble up in the DOM we cannot use an arrow function in this case. Also, the 'toHtml' method exists only in the constructor function which uses contextual this. 
+// Because contextual this is needed and we don't want the "this" to bubble up in the DOM we cannot use an arrow function in this case. Also, the 'toHtml' method exists only in the constructor function which uses contextual this.
 
 Article.prototype.toHtml = function() {
   let template = Handlebars.compile($('#article-template').text());
@@ -46,15 +46,16 @@ Article.fetchAll = () => {
   // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
   if (localStorage.rawData) {
     Article.loadAll(JSON.parse(localStorage.rawData));
+    articleView.initIndexPage();
   } else {
-    $.getJSON('/data/hackerIpsum.json')
+    $.getJSON('data/hackerIpsum.json')
       .then(rawData =>{
         Article.loadAll(rawData)
         localStorage.rawData = JSON.stringify(rawData);
+        articleView.initIndexPage();
       })
     err => {
       console.error(err);
     }
   }
-  articleView.initIndexPage();
 }

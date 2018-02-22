@@ -1,14 +1,13 @@
 # Kilovolt Blog - Day 6
 
 **Author**: Jose Reyes and Suzanne Richman
-**Version**: 1.0.2 (increment the patch/fix version number up if you make more commits past your first submission)
+
+**Version**: 1.0.2 
 
 ## Overview
 This product is designed to give users a consistent reading and navigation experience across mobile and desktop devices, with content ordered by most recent first and sortable by both author or category. Additionally, users who want to add articles to the blog may now do so and either publish immediately or review a draft. If they want they can use the JSON link at the bottom to add their new content to the blogArticles.js to be displayed on the main blog, as well. We wanted the user to load articles from an external source.
 
-
 ## Getting Started
-
 The user would need to 
 * Create index.html
 * Get the icons from IcoMoon (including all related files and CSS).
@@ -34,7 +33,6 @@ The user would need to
 
 
 ## Architecture
-
 I used IcoMoon icon font for navigation icons. I included the jQuery, Handlebars, Hightlight JS, and Railcasts libraies, with related CSS as needed. Applied AJAX function RESTful website application. I used Chrome to analyze and inspect. Project is built used HTML, CSS and JavaScript.```
 
 ## Change Log
@@ -43,9 +41,7 @@ I used IcoMoon icon font for navigation icons. I included the jQuery, Handlebars
 
 12:50 - last commit, all code reviewed and Zombie code removed. Updated README.
 
-02-21-2018
-
-
+02-22-2018 1:30pm - Resubmitting with a fix for the error of the page not reloading when localStorage is cleared. 
 
 ## Credits and Collaborations
 * Thanks to my instructors and TAs and our classmates 
@@ -57,3 +53,4 @@ I used IcoMoon icon font for navigation icons. I included the jQuery, Handlebars
 
 * Reference for local storage -https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage
 * Reference for arrow functions MDN- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+* Special thanks to Josiah Green for reviewing my fetchAll function with me.

@@ -115,5 +115,6 @@ articleView.initIndexPage = () => {
   articleView.handleCategoryFilter();
   articleView.handleAuthorFilter();
   articleView.handleMainNav();
+  // Article.fetchAll();
   articleView.setTeasers();
 };
